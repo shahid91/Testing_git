@@ -1,1 +1,54 @@
 git clone https://github.com/shahid91/Testing_git.git
+
+/user/MS365405/temp_data.csv
+
+ sqlContext
+ 
+ 
+ def select(cols: Column*): DataFrame = withPlan {
+  Project(cols.map(_.named), logicalPlan)
+}
+
+
+df.orderBy($"value".desc).show(1)
+
+ tempDF.select($"npaHeaderData.npaNumber".as("npaNumber"))
+
+val RDD = sc.textFile("/user/MS365405/temp_data.csv")
+val header = RDD.first()
+val data = RDD.filter(row => row != header)
+
+val splitted_data = data.flatMap(x => x.split(","))
+
+ val RDD = sc.textFile("/user/MS365405/temp_data.csv")
+ 
+ val header = RDD.first()
+
+val data = RDD.filter(row => row != header)
+
+val Splitted_RDD =  data.map(e => e.split(","))
+val city_tempRDD =  splitted_data.map{case Seq(city,_,temp) => (city,temp)}
+val city_tempDF =   city_tempRDD.toDF("city","temp")
+			   
+val RDD = sc.textFile("/user/MS365405/temp_data.csv").map(e => e.split(",")).map{case Seq(city,_,_,temp) => (city,temp)}.toDF("city","temp")			   
+
+val city = splitted_data.map(x => x(0).toString)
+
+city: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[4] at map at <console>:35
+
+scala> city.take(20)
+
+res2: Array[String] = Array(r, 2, 9, b, 2, 9, j, 3, 9, k, 3, 9, c, 0, 9, c, 0, 9, k, 0)
+scala> city.take(10)
+
+res3: Array[String] = Array(r, 2, 9, b, 2, 9, j, 3, 9, k)
+val rowListIterator = data.collect().iterator
+while (rowListIterator.hasNext) {
+val row = rowListIterator.next()
+
+val city = row.split(",")(0).trim
+}
+val city = splitted_data.map(x => x(0).toString)
+val splitted_data = data.flatMap(x => x.split(","))
+val rowListIterator = data.collect().iterator
+val DF = data.toDF()
